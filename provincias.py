@@ -95,7 +95,7 @@ if 0:
 	for a in autonomias:
 		print(a)
 # '13'=>"¿Qué autonomías tienen nombre simple? Ordena el resultado alfabéticamente en orden ",
-if 1:
+if 0:
 	autonomias={}
 	for p in provincias:
 		if(p['autonomia'].find(' ')<0):
@@ -103,9 +103,35 @@ if 1:
 	for a in sorted(autonomias.keys()):
 		print(a)
 # '14'=>"¿Qué autonomías tienen provincias con nombre compuesto? Ordenar el resultado ",
+if 0:
+	autonomias={}
+	for p in provincias:
+		if(p['provincia'].find(' ')>0):
+			autonomias[p['autonomia']]=1
+	for a in sorted(autonomias.keys()):
+		print(a)
 # '15'=>"Autonomías que comiencen por 'can' ordenadas alfabéticamente",
+if 0:
+	autonomias={}
+	for p in provincias:
+		if(p['autonomia'].find('Can')==0):
+			autonomias[p['autonomia']]=1
+	for a in sorted(autonomias.keys()):
+		print(a)
 # '16'=>"¿Qué autonomías tienen provincias de más de un millón de habitantes? Ordénalas ",
+if 0:
+	autonomias={}
+	for p in provincias:
+		if(p['poblacion']>1e6):
+			autonomias[p['autonomia']]=1
+	for a in sorted(autonomias.keys()):
+		print(a)
 # '21'=>"Población del país",
+if 1:
+	poblacion=0
+	for p in provincias:
+		poblacion+=p['poblacion']
+	print(poblacion)
 # '22'=>"Superficie del país",
 # '23'=>"¿Cuántas provincias hay en la tabla?",
 # '24'=>"En un listado alfabético, ¿qué provincia estaría la primera?",
