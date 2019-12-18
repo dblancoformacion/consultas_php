@@ -60,7 +60,7 @@ if 0:
 		if p['provincia'].find(' ')<0:
 			print(p['provincia'])
 # '51'=>"Muestra las provincias de Galicia, indicando si es Grande, Mediana o Pequeña en función ",
-if 1:
+if 0:
 	for p in provincias:
 		if p['autonomia']=='Galicia':
 			if p['poblacion']>1e6:
@@ -72,9 +72,36 @@ if 1:
 					r='Pequeña'
 			print('{} {}'.format(p['provincia'],r))
 # '10'=>"Autonomías terminadas en 'ana'",
+if 0:
+	autonomias={}
+	for p in provincias:
+		if p['autonomia'].find('ana')==len(p['autonomia'])-3:
+			autonomias[p['autonomia']]=1
+	for a in autonomias:
+		print(a)
 # '11'=>"¿Cuántos caracteres tiene cada nombre de comunidad autónoma? Ordena el resultado por el ",
+if 0:
+	autonomias={}
+	for p in provincias:
+		autonomias[p['autonomia']]=len(p['autonomia'])
+	for a in autonomias:
+		print('{} {}'.format(a,autonomias[a]))
 # '12'=>"¿Qué autonomías tienen nombre compuesto? Ordena el resultado alfabéticamente en orden ",
+if 0:
+	autonomias={}
+	for p in provincias:
+		if(p['autonomia'].find(' ')>0):
+			autonomias[p['autonomia']]=1
+	for a in autonomias:
+		print(a)
 # '13'=>"¿Qué autonomías tienen nombre simple? Ordena el resultado alfabéticamente en orden ",
+if 1:
+	autonomias={}
+	for p in provincias:
+		if(p['autonomia'].find(' ')<0):
+			autonomias[p['autonomia']]=1
+	for a in sorted(autonomias.keys()):
+		print(a)
 # '14'=>"¿Qué autonomías tienen provincias con nombre compuesto? Ordenar el resultado ",
 # '15'=>"Autonomías que comiencen por 'can' ordenadas alfabéticamente",
 # '16'=>"¿Qué autonomías tienen provincias de más de un millón de habitantes? Ordénalas ",
