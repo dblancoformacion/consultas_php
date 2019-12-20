@@ -277,7 +277,7 @@ if 0: # '44'=>"¿Qué porcentaje del total nacional representa Cantabria en pobl
 			pob_cantabria=p['poblacion']
 			sup_cantabria=p['superficie']
 	print(round(pob_cantabria/pob_total*100,2),round(sup_cantabria/sup_total*100,2))
-if 1: # '49'=>"Obtener la provincia más poblada de cada comunidad autónoma, indicando la población de ",
+if 0: # '49'=>"Obtener la provincia más poblada de cada comunidad autónoma, indicando la población de ",
 	autonomias={}
 	for p in provincias:
 		try: autonomias[p['autonomia']]
@@ -289,9 +289,94 @@ if 1: # '49'=>"Obtener la provincia más poblada de cada comunidad autónoma, in
 			autonomias[p['autonomia']]['provincia']=p['provincia']
 	for a in autonomias:
 		print(a,autonomias[a]['provincia'],autonomias[a]['poblacion'])
-# '47'=>"¿En qué posición del ranking autonómico por población de mayor a menor está Cantabria?",
-# '45'=>"Automía más extensa",
-# '46'=>"Autonomía con más provincias",
-# '48'=>"Provincia más despoblada de la autonomía más poblada",
-# '50'=>"Provincia más poblada de la autonomía más despoblada",
-# '06'=>"Listado de autonomías",
+if 0: # '47'=>"¿En qué posición del ranking autonómico por población de mayor a menor está Cantabria?",
+	autonomias={}
+	for p in provincias:
+		try: autonomias[p['autonomia']]
+		except: autonomias[p['autonomia']]=0
+		autonomias[p['autonomia']]+=p['poblacion']
+	for a in autonomias:
+		if a=='Cantabria':
+			pob_cantabria=autonomias[a]
+	pos=1;
+	for a in autonomias:
+		if autonomias[a]>pob_cantabria:
+			pos+=1
+	print(pos)
+if 0: # '45'=>"Automía más extensa",
+	autonomias={}
+	for p in provincias:
+		try: autonomias[p['autonomia']]
+		except: autonomias[p['autonomia']]=0
+		autonomias[p['autonomia']]+=p['superficie']
+	max_sup=0
+	for a in autonomias:
+		if max_sup<autonomias[a]:
+			max_sup=autonomias[a]
+	for a in autonomias:
+		if autonomias[a]==max_sup:
+			print(a)
+if 0: # '46'=>"Autonomía con más provincias",
+	autonomias={}
+	for p in provincias:
+		try: autonomias[p['autonomia']]
+		except: autonomias[p['autonomia']]=0
+		autonomias[p['autonomia']]+=1
+	max_n=0
+	for a in autonomias:
+		if max_n<autonomias[a]:
+			max_n=autonomias[a]
+	for a in autonomias:
+		if autonomias[a]==max_n:
+			print(a)
+if 0: # '48'=>"Provincia más despoblada de la autonomía más poblada",
+	autonomias={}
+	for p in provincias:
+		try: autonomias[p['autonomia']]
+		except: autonomias[p['autonomia']]=0
+		autonomias[p['autonomia']]+=p['poblacion']
+	max_pob=0
+	for a in autonomias:
+		if max_pob<autonomias[a]:
+			max_pob=autonomias[a]
+	for a in autonomias:
+		if max_pob==autonomias[a]:
+			amp=a
+	min_pob=10e6
+	for p in provincias:
+		if amp==p['autonomia']:
+			if min_pob>p['poblacion']:
+				min_pob=p['poblacion']
+	for p in provincias:
+		if amp==p['autonomia']:
+			if min_pob==p['poblacion']:
+				print(p['provincia'])
+if 0: # '50'=>"Provincia más poblada de la autonomía más despoblada",
+	autonomias={}
+	for p in provincias:
+		try: autonomias[p['autonomia']]
+		except: autonomias[p['autonomia']]=0
+		autonomias[p['autonomia']]+=p['poblacion']
+	min_pob=10e6
+	for a in autonomias:
+		if min_pob>autonomias[a]:
+			min_pob=autonomias[a]
+	for a in autonomias:
+		if min_pob==autonomias[a]:
+			amp=a
+	max_pob=0
+	for p in provincias:
+		if amp==p['autonomia']:
+			if max_pob<p['poblacion']:
+				max_pob=p['poblacion']
+	for p in provincias:
+		if amp==p['autonomia']:
+			if max_pob==p['poblacion']:
+				print(p['provincia'])
+if 1: # '06'=>"Listado de autonomías",
+	autonomias={}
+	for p in provincias:
+		autonomias[p['autonomia']]=1
+	for a in autonomias:
+		print(a)
+
