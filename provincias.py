@@ -220,7 +220,7 @@ if 0: # '38'=>"¿Cuántas provincias tiene cada comunidad autónoma?",
 		autonomias[p['autonomia']]+=1
 	for a in autonomias:
 		print('{} {}'.format(a,autonomias[a]))
-if 1: # '39'=>"Listado del número de provincias por autonomía ordenadas de más a menos provincias y ",
+if 0: # '39'=>"Listado del número de provincias por autonomía ordenadas de más a menos provincias y ",
 	autonomias={}
 	for p in provincias:
 		try: autonomias[p['autonomia']]
@@ -229,12 +229,66 @@ if 1: # '39'=>"Listado del número de provincias por autonomía ordenadas de má
 	for a in sorted(autonomias.items(),key =
              lambda kv:(kv[1], kv[0]),reverse=True):
 		print(a)
-# '40'=>"¿Cuántas provincias con nombre compuesto tiene cada comunidad autónoma?",
-# '41'=>"Autonomías uniprovinciales",
-# '42'=>"¿Qué autonomía tiene 5 provincias?",
-# '43'=>"Población de la autonomía más poblada",
-# '44'=>"¿Qué porcentaje del total nacional representa Cantabria en población y en superficie?",
-# '49'=>"Obtener la provincia más poblada de cada comunidad autónoma, indicando la población de ",
+if 0: # '40'=>"¿Cuántas provincias con nombre compuesto tiene cada comunidad autónoma?",
+	autonomias={}
+	for p in provincias:
+		if p['provincia'].find(' ')>0:
+			try: autonomias[p['autonomia']]
+			except: autonomias[p['autonomia']]=0
+			autonomias[p['autonomia']]+=1
+	for a in autonomias:
+		print(a,autonomias[a])
+if 0: # '41'=>"Autonomías uniprovinciales",
+	autonomias={}
+	for p in provincias:
+		try: autonomias[p['autonomia']]
+		except: autonomias[p['autonomia']]=0
+		autonomias[p['autonomia']]+=1
+	for a in autonomias:
+		if autonomias[a]==1:
+			print(a)
+if 0: # '42'=>"¿Qué autonomía tiene 5 provincias?",
+	autonomias={}
+	for p in provincias:
+		try: autonomias[p['autonomia']]
+		except: autonomias[p['autonomia']]=0
+		autonomias[p['autonomia']]+=1
+	for a in autonomias:
+		if autonomias[a]==5:
+			print(a)
+if 0: # '43'=>"Población de la autonomía más poblada",
+	autonomias={}
+	for p in provincias:
+		try: autonomias[p['autonomia']]
+		except: autonomias[p['autonomia']]=0
+		autonomias[p['autonomia']]+=p['poblacion']
+	pob=0
+	for a in autonomias:
+		if pob<autonomias[a]:
+			pob=autonomias[a]
+	print(pob)
+if 0: # '44'=>"¿Qué porcentaje del total nacional representa Cantabria en población y en superficie?",
+	pob_total=0
+	sup_total=0
+	for p in provincias:
+		pob_total+=p['poblacion']
+		sup_total+=p['superficie']
+		if p['provincia']=='Cantabria':
+			pob_cantabria=p['poblacion']
+			sup_cantabria=p['superficie']
+	print(round(pob_cantabria/pob_total*100,2),round(sup_cantabria/sup_total*100,2))
+if 1: # '49'=>"Obtener la provincia más poblada de cada comunidad autónoma, indicando la población de ",
+	autonomias={}
+	for p in provincias:
+		try: autonomias[p['autonomia']]
+		except: autonomias[p['autonomia']]={}
+		try: autonomias[p['autonomia']]['poblacion']
+		except: autonomias[p['autonomia']]['poblacion']=0
+		if autonomias[p['autonomia']]['poblacion']<p['poblacion']:
+			autonomias[p['autonomia']]['poblacion']=p['poblacion']
+			autonomias[p['autonomia']]['provincia']=p['provincia']
+	for a in autonomias:
+		print(a,autonomias[a]['provincia'],autonomias[a]['poblacion'])
 # '47'=>"¿En qué posición del ranking autonómico por población de mayor a menor está Cantabria?",
 # '45'=>"Automía más extensa",
 # '46'=>"Autonomía con más provincias",
