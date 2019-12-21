@@ -379,4 +379,3 @@ if 1: # '06'=>"Listado de autonomías",
 		autonomias[p['autonomia']]=1
 	for a in autonomias:
 		print(a)
-
