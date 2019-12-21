@@ -16,6 +16,5 @@ else{	// generación del array $provincias
 	$provincias=$conn->query("
 		SELECT * FROM provincias;
 	")->fetch_all(MYSQLI_ASSOC);
-	sleep(2);
 	echo json_encode($provincias);
 }
