@@ -4,10 +4,11 @@
 <script>
 window.onload=inicio;
 async function datos(){
+	// https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono
     let url = 'http://localhost/decroly/consultas_php/json.php';
     let ps = await (await fetch(url,{mode:"no-cors"})).json();
 	r='';
-	if(0){	// Visitas en provincias
+	if(1){	// Visitas en provincias
 		for(i=0;i<ps.length;i++){
 			r+='<div id="'+ps[i]['provincia']+'"';
 			r+=' onclick="visita('+(i+1)+')"';
@@ -60,7 +61,7 @@ async function datos(){
 			if(ps[i]['provincia'].search('ue')>0)
 				r+=ps[i]['provincia']+'<br/>';
 	}
-	if(1){	// '09'=>"Provincias que empiezan por A",
+	if(0){	// '09'=>"Provincias que empiezan por A",
 		for(i=0;i<ps.length;i++)
 			if(ps[i]['provincia'][0]=='A' || ps[i]['provincia'][0]=='Á')
 				r+=ps[i]['provincia']+'<br/>';
@@ -115,7 +116,7 @@ async function datos(){
 }
 function inicio(){
 	datos();
-	//var timer = setInterval(datos, 1000);	// repetición indefinida hasta clearInterval(timer)
+	var timer = setInterval(datos, 1000);	// repetición indefinida hasta clearInterval(timer)
 }
 async function visita(id){
 	let url = 'http://localhost/decroly/consultas_php/json.php?id='+id;
