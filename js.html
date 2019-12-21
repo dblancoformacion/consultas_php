@@ -1,55 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--<meta http-equiv="refresh" content="1">-->
 <script>
 window.onload=inicio;
-async function inicio(){
+async function datos(){
     let url = 'http://localhost/decroly/consultas_php/json.php';
-    let provincias = await (await fetch(url,{mode:"no-cors"})).json();
+    let ps = await (await fetch(url,{mode:"no-cors"})).json();
+	r='';
+	if(1){	// Visitas en provincias
+		for(i=0;i<ps.length;i++){
+			r+='<div id="'+ps[i]['provincia']+'"';
+			r+=' onclick="visita('+(i+1)+')"';
+			r+='>';
+			r+=ps[i]['visitas'];
+			r+=' ';
+			r+=ps[i]['provincia'];
+			r+='</div>';
+		}
+	}
+	//////////////////////////////////////////////
 	if(0){	// Listado de provincias
-		console.log(provincias);
-		r='';
-		for(i=0;i<provincias.length;i++)
-			r+=provincias[i]['provincia']+'<br/>';
-		return r;
+		for(i=0;i<ps.length;i++)
+			r+=ps[i]['provincia']+'<br/>';
 	}
 	if(0){	// ¿Cuánto suman 2 y 3?
-		return 2+3;
+		r = 2+3;
 	}
 	if(0){	// Densidades de población de las provincias
-		ps=datos();
-		r=''
 		for(i=0;i<ps.length;i++){
 			r+=ps[i]['provincia']+' ';
 			r+=(ps[i]['poblacion']/ps[i]['superficie']);
 			r+='<br/>';
 		}
-		return r;
 	}
 	if(0){	// Obtén el listado del nombre de las provincias que tiene cada autonomía
-		ps=datos();
-		r='';
 		for(i=0;i<ps.length;i++){
 			r+=ps[i]['autonomia']+' ';
 			r+=ps[i]['provincia'];
 			r+='<br/>';
 		}
-		return r;
 	}
 	if(0){	// ¿Cuánto vale la raíz cuadrada de 2?
-		return Math.sqrt(2);
+		r = Math.sqrt(2);
 	}
 	if(0){	// ¿Cuántos caracteres tiene cada nombre de provincia?
-		ps=datos();
-		r='';
 		for(i=0;i<ps.length;i++){
 			r+=ps[i]['provincia']+' ';
 			r+=ps[i]['provincia'].length;
 			r+='<br/>';
 		}
-		return r;
 	}
+	//////////////////////////////////////////////
 	document.getElementById("resultado").innerHTML=r;
+	return ps;
+}
+const delay = ms => new Promise(res => setTimeout(res, ms));
+async function inicio(){
+	for(;;){
+		datos();
+		await(delay(1000));
+	}
+}
+async function visita(id){
+	let url = 'http://localhost/decroly/consultas_php/json.php?id='+id;
+	let ps = await (await fetch(url,{mode:"no-cors"})).json();
+	datos();
 }
 </script>
 </head>
