@@ -71,13 +71,17 @@ async function datos(){
 			if(ps[i]['autonomia'].search(' ')>0)
 				r+=ps[i]['provincia']+'<br/>';
 	}
-	if(1){	// '18'=>"¿Qué provincias tienen nombre compuesto?",
+	if(0){	// '18'=>"¿Qué provincias tienen nombre compuesto?",
 		for(i=0;i<ps.length;i++)
 			if(ps[i]['provincia'].search(' ')>0)
 				r+=ps[i]['provincia']+'<br/>';
 	}
+	if(1){	// '19'=>"¿Qué provincias tienen nombre simple?",
+		for(i=0;i<ps.length;i++)
+			if(ps[i]['provincia'].search(' ')<0)
+				r+=ps[i]['provincia']+'<br/>';
+	}
 	/*
-'19'=>"¿Qué provincias tienen nombre simple?",
 '51'=>"Muestra las provincias de Galicia, indicando si es Grande, Mediana o Pequeña en función ",
 '10'=>"Autonomías terminadas en 'ana'",
 '11'=>"¿Cuántos caracteres tiene cada nombre de comunidad autónoma? Ordena el resultado por el ",
