@@ -7,6 +7,9 @@ if 1: # Acceso a la base de datos de provincias
 	provincias=conn.fetchall()
 if 0: # Resultado de la consulta
 	print(provincias)
+if 0: # Listado de campos
+	for c in provincias[0]:
+		print(c)
 if 0: # (01) Listado de provincias
 	for p in provincias:
 		print(p['provincia'])
