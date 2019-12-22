@@ -5,7 +5,7 @@
 window.onload=inicio;
 async function datos(){
 	// https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono
-    let url = 'http://localhost/decroly/consultas_php/json.php';
+    let url = 'http://localhost/decroly/provincias/json.php';
     let ps = await (await fetch(url,{mode:"no-cors"})).json();
 	r='';
 	if(0){	// Visitas en provincias
@@ -66,13 +66,17 @@ async function datos(){
 			if(ps[i]['provincia'][0]=='A' || ps[i]['provincia'][0]=='Á')
 				r+=ps[i]['provincia']+'<br/>';
 	}
-	if(1){	// '17'=>"¿Qué provincias están en autonomías con nombre compuesto?",
+	if(0){	// '17'=>"¿Qué provincias están en autonomías con nombre compuesto?",
 		for(i=0;i<ps.length;i++)
 			if(ps[i]['autonomia'].search(' ')>0)
 				r+=ps[i]['provincia']+'<br/>';
 	}
+	if(1){	// '18'=>"¿Qué provincias tienen nombre compuesto?",
+		for(i=0;i<ps.length;i++)
+			if(ps[i]['provincia'].search(' ')>0)
+				r+=ps[i]['provincia']+'<br/>';
+	}
 	/*
-'18'=>"¿Qué provincias tienen nombre compuesto?",
 '19'=>"¿Qué provincias tienen nombre simple?",
 '51'=>"Muestra las provincias de Galicia, indicando si es Grande, Mediana o Pequeña en función ",
 '10'=>"Autonomías terminadas en 'ana'",
@@ -123,7 +127,7 @@ function inicio(){
 	//var timer = setInterval(datos, 1000);	// repetición indefinida hasta clearInterval(timer)
 }
 async function visita(id){
-	let url = 'http://localhost/decroly/consultas_php/json.php?id='+id;
+	let url = 'http://localhost/decroly/provincias/json.php?id='+id;
 	let ps = await (await fetch(url,{mode:"no-cors"})).json();
 	datos();
 }
