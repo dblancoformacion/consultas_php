@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <script>
@@ -76,15 +76,46 @@ async function datos(){
 			if(ps[i]['provincia'].search(' ')>0)
 				r+=ps[i]['provincia']+'<br/>';
 	}
-	if(1){	// '19'=>"¿Qué provincias tienen nombre simple?",
+	if(0){	// '19'=>"¿Qué provincias tienen nombre simple?",
 		for(i=0;i<ps.length;i++)
 			if(ps[i]['provincia'].search(' ')<0)
 				r+=ps[i]['provincia']+'<br/>';
 	}
+	if(0){	// '51'=>"Muestra las provincias de Galicia, indicando si es Grande, Mediana o Pequeña en función ",
+		for(i=0;i<ps.length;i++)
+			if(ps[i]['autonomia']=='Galicia'){
+				switch(Math.floor(ps[i]['poblacion']/5e5)){
+					case 0: r+='Pequeña ';break;
+					case 1: r+='Mediana ';break;
+					case 2: r+='Grande ';break;
+				}
+				r+=ps[i]['provincia']+'<br/>';
+			}
+	}
+	if(0){	// '10'=>"Autonomías terminadas en 'ana'",
+		autonomias=[];
+		for(i=0;i<ps.length;i++)
+			if( ps[i]['autonomia'].search('ana') == ps[i]['autonomia'].length-3 )
+				autonomias[ps[i]['autonomia']]=1;
+		for(a in autonomias)
+			r+=a+'<br/>';
+	}
+	if(0){	// '11'=>"¿Cuántos caracteres tiene cada nombre de comunidad autónoma? Ordena el resultado por el ",
+		autonomias=[];
+		for(i in ps)
+			autonomias[ps[i]['autonomia']]=ps[i]['autonomia'].length;
+		for(a in autonomias)
+			r+=a+' '+a.length+'<br/>';
+	}
+	if(1){	// '12'=>"¿Qué autonomías tienen nombre compuesto? Ordena el resultado alfabéticamente en orden ",
+		autonomias=[];
+		for(i in ps)
+			if(ps[i]['autonomia'].search(' ')>0)
+				autonomias[ps[i]['autonomia']]=1;
+		for(a in autonomias)
+			r+=a+'<br/>';
+	}
 	/*
-'51'=>"Muestra las provincias de Galicia, indicando si es Grande, Mediana o Pequeña en función ",
-'10'=>"Autonomías terminadas en 'ana'",
-'11'=>"¿Cuántos caracteres tiene cada nombre de comunidad autónoma? Ordena el resultado por el ",
 '12'=>"¿Qué autonomías tienen nombre compuesto? Ordena el resultado alfabéticamente en orden ",
 '13'=>"¿Qué autonomías tienen nombre simple? Ordena el resultado alfabéticamente en orden ",
 '14'=>"¿Qué autonomías tienen provincias con nombre compuesto? Ordenar el resultado ",
