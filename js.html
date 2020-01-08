@@ -107,7 +107,7 @@ async function datos(){
 		for(a in autonomias)
 			r+=a+' '+a.length+'<br/>';
 	}
-	if(1){	// '12'=>"¿Qué autonomías tienen nombre compuesto? Ordena el resultado alfabéticamente en orden ",
+	if(0){	// '12'=>"¿Qué autonomías tienen nombre compuesto? Ordena el resultado alfabéticamente en orden ",
 		autonomias=[];
 		for(i in ps)
 			if(ps[i]['autonomia'].search(' ')>0)
@@ -115,10 +115,24 @@ async function datos(){
 		for(a in autonomias)
 			r+=a+'<br/>';
 	}
+	if(0){	// '13'=>"¿Qué autonomías tienen nombre simple? Ordena el resultado alfabéticamente en orden ",
+		autonomias=[];
+		for(i in ps)
+			if(ps[i]['autonomia'].search(' ')<0)
+				autonomias[ps[i]['autonomia']]=1;
+		for(a in autonomias)
+			r+=a+'<br/>';
+	}
+	if(1){ // '14'=>"¿Qué autonomías tienen provincias con nombre compuesto? Ordenar el resultado ",
+		autonomias=[];
+		for(i in ps)
+			if(ps[i]['provincia'].search(' ')>0)
+				autonomias[ps[i]['autonomia']]=1;
+		as=ksort(autonomias);
+		for(a in as)
+			r+=a+'<br/>';
+	}
 	/*
-'12'=>"¿Qué autonomías tienen nombre compuesto? Ordena el resultado alfabéticamente en orden ",
-'13'=>"¿Qué autonomías tienen nombre simple? Ordena el resultado alfabéticamente en orden ",
-'14'=>"¿Qué autonomías tienen provincias con nombre compuesto? Ordenar el resultado ",
 '15'=>"Autonomías que comiencen por 'can' ordenadas alfabéticamente",
 '16'=>"¿Qué autonomías tienen provincias de más de un millón de habitantes? Ordénalas ",
 '21'=>"Población del país",
@@ -156,6 +170,20 @@ async function datos(){
 	//////////////////////////////////////////////
 	document.getElementById("resultado").innerHTML=r;
 	return ps;
+}
+function ksort(a){
+	// paso los índices del array asociativo a uno enumerado
+	i=0;
+	c=[];
+	for(b in a)
+		c[i++]=b;
+	c.sort();	// ahora sí que me permite ordenarlo
+	// una vez, ordenado, reconstruyo el array asociativo
+	i=0;
+	e={};
+	for(d in c)
+		e[c[d]]=a[c[d]];
+	return e;
 }
 function inicio(){
 	datos();
